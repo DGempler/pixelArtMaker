@@ -57,13 +57,30 @@ Add a paintbucket tool which allows a user to drag a box across the screen and p
     colorDivCreator("rgb(" + (10 + j) + "," + (250 - j) + "," + j + ")");
   }
 
+  var mouseDown = false;
+  section.onmousedown = function() {
+    mouseDown = true;
+  };
+  section.onmouseup = function() {
+    mouseDown = false;
+  };
+
+
+
+
   for (var k = 0; k < divider.length; k++) {
     divider[k].addEventListener("click", function() {
       var color = this.style.backgroundColor === chosenColor ? "rgb(255,255,255)" : chosenColor;
       this.style.backgroundColor = color;
-      console.log(color);
     });
+    divider[k].addEventListener("mouseover", function() {
+      if (mouseDown) {
+        var color = this.style.backgroundColor === chosenColor ? "rgb(255,255,255)" : chosenColor;
+        this.style.backgroundColor = color;
+      }
+    })
   }
+
 
 
 
