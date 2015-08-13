@@ -5,6 +5,19 @@ First create multiple divs using checkerboard as template
     use rgb to set colors
 
   set reset button - total and individual boxes (terniary)
+
+  Here's the order of steps that I would implement:
+
+Get 10 or so small divs on the screen
+Add an event listener to each so that when I click on a pixel it turns red
+Add a color palette div with 2 colors(red and purple)which allows the user to set the current "paintbrush" color instead of it always being set to red
+Add the rest of the standard rainbow colors to the color palette
+Add enough divs to fill up the entire screen
+Bonus Challenges:
+
+Add a color picker which allows the user to select any color. Look into the HTML5 color input.
+Add the ability to click and drag to paint multiple pixels at once
+Add a paintbucket tool which allows a user to drag a box across the screen and paint all pixels that fall inside that box
 */
 
 
@@ -28,7 +41,6 @@ First create multiple divs using checkerboard as template
     divCreator();
   }
   var divider = document.body.querySelectorAll(".divider");
-  console.log(divider);
   function colorDivCreator(rgbCode) {
     var newDiv = document.createElement('div');
     newDiv.style.width = "39px";
@@ -36,20 +48,22 @@ First create multiple divs using checkerboard as template
     newDiv.style.cssFloat = "left";
     newDiv.style.backgroundColor = rgbCode;
     newDiv.style.border = "1px solid rgb(240,240,240)";
+    newDiv.addEventListener("click", function() {
+      chosenColor = this.style.backgroundColor;
+    });
     return colorPicker.appendChild(newDiv);
   }
   for (var j = 0; j < 240; j+=10) {
     colorDivCreator("rgb(" + (10 + j) + "," + (250 - j) + "," + j + ")");
   }
 
-  for (var k = 0; k < 3984; k++) {
+  for (var k = 0; k < divider.length; k++) {
     divider[k].addEventListener("click", function() {
-      var color = this.style.backgroundColor === "yellow" ? "white" : "yellow";
+      var color = this.style.backgroundColor === chosenColor ? "rgb(255,255,255)" : chosenColor;
       this.style.backgroundColor = color;
+      console.log(color);
     });
   }
-
-
 
 
 
