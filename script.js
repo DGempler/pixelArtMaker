@@ -29,6 +29,7 @@ Add a paintbucket tool which allows a user to drag a box across the screen and p
   var input = document.querySelector('input');
   var divider;
   var mouseDown = false;
+  var resetButton = document.querySelector('#reset');
 
   function divCreator() {
     var newDiv = document.createElement('div');
@@ -45,7 +46,7 @@ Add a paintbucket tool which allows a user to drag a box across the screen and p
     divCreator();
   }
 
-  divider = document.body.querySelectorAll(".divider");
+  divider = document.querySelectorAll(".divider");
 
   function colorDivCreator(rgbCode) {
     var newDiv = document.createElement('div');
@@ -88,5 +89,11 @@ Add a paintbucket tool which allows a user to drag a box across the screen and p
   colorPalette.onchange = function() {
     chosenColor = "#" +colorPalette.value;
   };
+
+  resetButton.addEventListener("click", function() {
+    for (var l = 0; l < divider.length; l++) {
+      divider[l].style.backgroundColor = "white";
+    }
+  });
 
 })();
