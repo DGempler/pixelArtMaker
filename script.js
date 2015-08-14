@@ -25,7 +25,10 @@ Add a paintbucket tool which allows a user to drag a box across the screen and p
   var section = document.querySelector('#wrapper');
   var colorPicker = document.querySelector('#colorPicker');
   var chosenColor = "rgb(0,255,255)";
-
+  var colorPalette = document.querySelector('.color');
+  var input = document.querySelector('input');
+  var divider;
+  var mouseDown = false;
 
   function divCreator() {
     var newDiv = document.createElement('div');
@@ -37,10 +40,13 @@ Add a paintbucket tool which allows a user to drag a box across the screen and p
     newDiv.setAttribute("class", "divider");
     return section.appendChild(newDiv);
   }
+
   for (var i = 0; i < 3984; i++) {
     divCreator();
   }
-  var divider = document.body.querySelectorAll(".divider");
+
+  divider = document.body.querySelectorAll(".divider");
+
   function colorDivCreator(rgbCode) {
     var newDiv = document.createElement('div');
     newDiv.style.width = "39px";
@@ -53,20 +59,18 @@ Add a paintbucket tool which allows a user to drag a box across the screen and p
     });
     return colorPicker.appendChild(newDiv);
   }
+
   for (var j = 0; j < 240; j+=10) {
     colorDivCreator("rgb(" + (10 + j) + "," + (250 - j) + "," + j + ")");
   }
 
-  var mouseDown = false;
+
   section.onmousedown = function() {
     mouseDown = true;
   };
   section.onmouseup = function() {
     mouseDown = false;
   };
-
-
-
 
   for (var k = 0; k < divider.length; k++) {
     divider[k].addEventListener("click", function() {
@@ -81,8 +85,8 @@ Add a paintbucket tool which allows a user to drag a box across the screen and p
     })
   }
 
-
-
-
+  colorPalette.onchange = function() {
+    chosenColor = "#" +colorPalette.value;
+  };
 
 })();
